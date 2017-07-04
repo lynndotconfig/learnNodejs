@@ -149,22 +149,54 @@
 // 	return f()
 // }
 
-var memoizer = function (memo, formula) {
-	var recur = function (n) {
-		var result = memo[n]
-		if (typeof result !== 'number') {
-			result = formula(recur, n)
-			memo[n] = result
-		}
-		return result
+// var memoizer = function (memo, formula) {
+// 	var m = memo
+// 	var recur = function (n) {
+// 		var result = m[n]
+// 		if (typeof result !== 'number') {
+// 			console.log(m)
+// 			// console.log(n)
+// 			result = formula(recur, n)
+// 			m[n] = result
+// 		}
+// 		return result
+// 	}
+// 	return recur
+// }
+
+// var fibonacci = memoizer([0, 1], function (recur, n) {
+// 	console.log(n)
+// 	return recur(n - 1) + recur(n - 2)
+// })
+
+// var factorial = memoizer([1, 1], function (recur, n) {
+// 	return n * recur(n - 1)
+// })
+
+// console.log(fibonacci(5))
+
+Function.prototype.method = function (name, func) {
+	if(!this.prototype[name]){
+		this.prototype[name] = func
+		return this	
 	}
-	return recur
 }
 
-var fibonacci = memoizer([0, 1], function (recur, n) {
-	return recur(n - 1) + recur(n - 2)
+Function.method('curry', function () {
+	var slice = Array.prototype.slice
+	var args = slice.apply(arguments), that = this
+	return function (){
+		return that.apply(null, args.concat(slice.apply(arguments)))
+	}
 })
 
-var factorial = memoizer([1, 1], function (recur, n) {
-	return n * recur(n - 1)
-})
+var add = function () {
+	var i, sum = 0
+	for (i = 0; i < arguments.length; i++) {
+		sum += arguments[i]
+	}
+	return sum
+}
+
+var addl = add.curry(2, 3)
+console.log(addl(3))
