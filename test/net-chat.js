@@ -40,3 +40,7 @@ function broadcast(message, client) {
 }
 
 server.listen(port,host)
+
+// Usage:
+
+// open a terminal and type 'telnet 127.0.0.1 6688' after run this code
