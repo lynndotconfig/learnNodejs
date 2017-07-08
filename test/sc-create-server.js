@@ -9,7 +9,7 @@ net.createServer(function (sock) {
 	console.log('connected: ' + sock.remoteAddress + ':' + sock.remotePort)
 	sock.on('data', function (data) {
 		console.log('data ' + sock.remoteAddress + ':' + data)
-		sock.write('server write: ' + data)
+		sock.write('server write: ' + 'hello from server')
 
 	})
 	sock.on('close', function (data) {
