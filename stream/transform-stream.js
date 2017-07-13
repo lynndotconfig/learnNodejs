@@ -6,6 +6,8 @@ CSVParser.prototype = Object.create(stream.Transform.prototype, {
 })
 
 function CSVParser(options) {
+	options = options || {}
+	options.objectMode = true
 	stream.Transform.call(this, options)
 
 	this.value = ''
@@ -29,7 +31,7 @@ CSVParser.prototype._transform = function (chunk, encoding, done) {
 		} else if(c === '\n') {
 			this.addValue()
 			if(this.line > 0) {
-				this.push(JSON.stringify(this.toObject()))
+				this.push(this.toObject())
 			}
 			this.values = []
 			this.line++
@@ -58,7 +60,13 @@ CSVParser.prototype.addValue = function () {
 	this.value = ''
 }
 
+// if(require.main === module) {
+// or 
+if(!module.parent) {
 var parser = new CSVParser()
 fs.createReadStream(__dirname + '/sample.csv')
 	.pipe(parser)
-	.pipe(process.stdout)
+	.pipe(process.stdout)	
+}
+
+module.exports = CSVParser
