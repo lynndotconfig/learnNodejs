@@ -35,6 +35,8 @@ audioDomain.on('error', function (err) {
 })
 
 audioDomain.run(function () {
-	var musicPlayer = new MusicPlayer()
-	musicPlayer.play()
+	// var musicPlayer = new MusicPlayer()
+	// musicPlayer.play()
+	var audioDevice = new AudioDevice()
+	audioDevice.play()
 })
