@@ -32,4 +32,4 @@ http.createServer(function (req, res) {
 		})
 		.pipe(zlib.createGzip())
 		.pipe(res)
-}).listen(8000)
+}).listen(3000)

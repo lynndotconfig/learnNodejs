@@ -22,6 +22,7 @@
   "dependencies": {
     "async": "^2.5.0",
     "baudio": "^2.1.2",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "http-proxy": "^1.16.2"
   }
 }

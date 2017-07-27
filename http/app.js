@@ -19,7 +19,11 @@ StatStream.prototype._read = function (size) {
 		//Done
 		this.push(null)
 	} else {
-		console.log(this.limit)
+		
+		// if(this.limit < 8) {
+		// 	process.exit()
+		// }
+		// console.log(this.limit)
 		this.push(util.inspect(process.memoryUsage()))
 		this.push('\n')
 		this.limit = this.limit - 1
